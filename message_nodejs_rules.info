@@ -1,0 +1,12 @@
+name = Message Node.js Integration
+description = "A general message logging utility."
+core = 7.x
+package = Message
+dependencies[] = message
+dependencies[] = rules
+dependencies[] = nodejs_notify
+
+version = "7.x-1.1+0-dev"
+core = "7.x"
+project = "message_nodejs_rules"
+datestamp = "1413873705"

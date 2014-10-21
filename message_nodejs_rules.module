@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Implements hook_rules_action_info().
+ *
+ * Con este módulo definimos acciones propias para Rules:
+ * - Enviar mensaje por Node.js
+ * 
+ * Primero definimos el callback
+ * parameter: los valores que le pasamos a la función
+ * provides: valores que devuelve la acción
+ */
+function message_nodejs_rules_rules_action_info(){
+  $actions = array( 
+    'message_nodejs_rules_send_message' => array( 
+      'group' => 'Node.js', 
+      'label' => t('Send Message with Node.js'),
+      'parameter' => array( 
+        'message' => array( 
+          'type' => 'message', 
+          'label' => t('Message to send'), 
+          'save' => FALSE, 
+        ), 
+        'receiver' => array( 
+          'type' => 'user', 
+          'label' => t('User that receive the notification'), 
+          'save' => FALSE, 
+        ),
+      ),
+    ), 
+  );
+  return $actions;
+}
+
+/**
+ * Callback de la acción: Enviar mensaje por Node.js.
+ *
+ * @param object $message
+ *   El objeto message a enviar.
+ * @param object $receiver
+ *   El objeto usuario que recibe la notificación.
+ */
+function message_nodejs_rules_send_message($message, $receiver) { 
+	nodejs_send_user_message($receiver->uid, '', $message->getText(NULL, array()));
+}
